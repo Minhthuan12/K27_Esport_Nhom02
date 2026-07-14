@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('tran_dau_dois', function (Blueprint $table) {
+            $table->id();
+            $table->integer('id_vong_dau');
+            $table->integer('so_luong_doi');
+            $table->dateTime('thoi_gian_thi_dau');
+            $table->string('the_thuc');
+            $table->integer('trang_thai')->default(1)->comment('0: Không hoạt động, 1: Hoạt động');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tran_dau_dois');
+    }
+};
