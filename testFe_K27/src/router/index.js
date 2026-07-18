@@ -25,7 +25,6 @@ const routes = [
         path: '/thong-ke-doi-tuyen',
         component: () => import('../components/Admin/ThongSoDoiTuyen/index.vue')
     },
-    // GROUP 2 ROUTES
     {
         path: '/giai-dau',
         component: () => import('../components/Admin/GiaiDau/index.vue')
@@ -42,7 +41,6 @@ const routes = [
         path: '/ket-qua-giai-dau',
         component: () => import('../components/Admin/KetQuaGiaiDau/index.vue')
     },
-    // GROUP 3 ROUTES
     {
         path: '/nha-tai-tro',
         component: () => import('../components/Admin/NhaTaiTro/index.vue')
@@ -55,7 +53,6 @@ const routes = [
         path: '/giai-thuong',
         component: () => import('../components/Admin/GiaiThuong/index.vue')
     },
-    // GROUP 4 ROUTES
     {
         path: '/tin-tuc',
         component: () => import('../components/Admin/TinTuc/index.vue')
@@ -72,7 +69,6 @@ const routes = [
         path: '/chuc-vu',
         component: () => import('../components/Admin/ChucVu/index.vue')
     },
-    // GROUP 5 ROUTES
     {
         path: '/game',
         component: () => import('../components/Admin/Game/index.vue')
@@ -88,6 +84,71 @@ const routes = [
     {
         path: '/phan-quyen',
         component: () => import('../components/Admin/PhanQuyen/index.vue')
+    },
+
+    // --- BỘ THỐNG KÊ MỚI CHUẨN 7 NHÓM ---
+    // NHÓM 1
+    {
+        path: '/thong-ke/nhom-1/cau-1',
+        component: () => import('../components/Admin/ThongKe/Nhom1/Cau1.vue')
+    },
+    {
+        path: '/thong-ke/nhom-1/cau-2',
+        component: () => import('../components/Admin/ThongKe/Nhom1/Cau2.vue')
+    },
+    // NHÓM 2
+    {
+        path: '/thong-ke/nhom-2/cau-1',
+        component: () => import('../components/Admin/ThongKe/Nhom2/Cau1.vue')
+    },
+    {
+        path: '/thong-ke/nhom-2/cau-2',
+        component: () => import('../components/Admin/ThongKe/Nhom2/Cau2.vue')
+    },
+    // NHÓM 3
+    {
+        path: '/thong-ke/nhom-3/cau-1',
+        component: () => import('../components/Admin/ThongKe/Nhom3/Cau1.vue')
+    },
+    {
+        path: '/thong-ke/nhom-3/cau-2',
+        component: () => import('../components/Admin/ThongKe/Nhom3/Cau2.vue')
+    },
+    // NHÓM 4
+    {
+        path: '/thong-ke/nhom-4/cau-1',
+        component: () => import('../components/Admin/ThongKe/Nhom4/Cau1.vue')
+    },
+    {
+        path: '/thong-ke/nhom-4/cau-2',
+        component: () => import('../components/Admin/ThongKe/Nhom4/Cau2.vue')
+    },
+    // NHÓM 5
+    {
+        path: '/thong-ke/nhom-5/cau-1',
+        component: () => import('../components/Admin/ThongKe/Nhom5/Cau1.vue')
+    },
+    {
+        path: '/thong-ke/nhom-5/cau-2',
+        component: () => import('../components/Admin/ThongKe/Nhom5/Cau2.vue')
+    },
+    // NHÓM 6
+    {
+        path: '/thong-ke/nhom-6/cau-1',
+        component: () => import('../components/Admin/ThongKe/Nhom6/Cau1.vue')
+    },
+    {
+        path: '/thong-ke/nhom-6/cau-2',
+        component: () => import('../components/Admin/ThongKe/Nhom6/Cau2.vue')
+    },
+    // NHÓM 7
+    {
+        path: '/thong-ke/nhom-7/cau-1',
+        component: () => import('../components/Admin/ThongKe/Nhom7/Cau1.vue')
+    },
+    {
+        path: '/thong-ke/nhom-7/cau-2',
+        component: () => import('../components/Admin/ThongKe/Nhom7/Cau2.vue')
     },
 ]
 

@@ -4,48 +4,44 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\GiaiDau;
+use App\Models\NhaTaiTro;
 use App\Models\TaiTroGiaiDau;
 
 class TaiTroGiaiDauSeeder extends Seeder
 {
     public function run(): void
     {
-        $giaiDaus = GiaiDau::all();
+        $giaiDaus   = GiaiDau::all();
+        $nhaTaiTros = NhaTaiTro::all();
 
-        foreach ($giaiDaus as $gd) {
-            // Xác định 3 nhà tài trợ khác nhau cho mỗi giải đấu (xoay vòng trong 24 nhà tài trợ)
-            $sponsorA = (($gd->id * 2) % 24) + 1;
-            $sponsorB = (($gd->id * 3) % 24) + 1;
-            $sponsorC = (($gd->id * 5) % 24) + 1;
+        if ($giaiDaus->isEmpty() || $nhaTaiTros->isEmpty()) {
+            return;
+        }
 
-            // Đảm bảo các nhà tài trợ không trùng nhau trong cùng một giải đấu
-            if ($sponsorB === $sponsorA) {
-                $sponsorB = ($sponsorB % 24) + 1;
+        $sponsorIds = $nhaTaiTros->pluck('id')->toArray();
+        $budgetPool = [50000000, 80000000, 120000000, 200000000, 350000000, 500000000, 750000000, 1200000000];
+        $totalSponsors = count($sponsorIds);
+
+        foreach ($giaiDaus as $index => $gd) {
+            // Chọn 3 nhà tài trợ xác định cho mỗi giải đấu (Không dùng rand)
+            $sponsorA = $sponsorIds[($index * 3 + 0) % $totalSponsors];
+            $sponsorB = $sponsorIds[($index * 3 + 1) % $totalSponsors];
+            $sponsorC = $sponsorIds[($index * 3 + 2) % $totalSponsors];
+
+            $sponsors = [
+                ['id' => $sponsorA, 'amount' => $budgetPool[($index + 0) % count($budgetPool)]],
+                ['id' => $sponsorB, 'amount' => $budgetPool[($index + 2) % count($budgetPool)]],
+                ['id' => $sponsorC, 'amount' => $budgetPool[($index + 4) % count($budgetPool)]],
+            ];
+
+            foreach ($sponsors as $sp) {
+                TaiTroGiaiDau::create([
+                    'id_nha_tai_tro' => $sp['id'],
+                    'id_giai_dau'    => $gd->id,
+                    'tong_tai_tro'   => $sp['amount'],
+                    'created_at'     => $gd->ngay_bat_dau . ' 09:00:00',
+                ]);
             }
-            if ($sponsorC === $sponsorA || $sponsorC === $sponsorB) {
-                $sponsorC = (($sponsorC + 1) % 24) + 1;
-            }
-
-            // Nhà tài trợ 1
-            TaiTroGiaiDau::create([
-                'id_nha_tai_tro' => $sponsorA,
-                'id_giai_dau'    => $gd->id,
-                'tong_tai_tro'   => 120000000, // 120 triệu
-            ]);
-
-            // Nhà tài trợ 2
-            TaiTroGiaiDau::create([
-                'id_nha_tai_tro' => $sponsorB,
-                'id_giai_dau'    => $gd->id,
-                'tong_tai_tro'   => 80000000, // 80 triệu
-            ]);
-
-            // Nhà tài trợ 3
-            TaiTroGiaiDau::create([
-                'id_nha_tai_tro' => $sponsorC,
-                'id_giai_dau'    => $gd->id,
-                'tong_tai_tro'   => 50000000, // 50 triệu
-            ]);
         }
     }
 }

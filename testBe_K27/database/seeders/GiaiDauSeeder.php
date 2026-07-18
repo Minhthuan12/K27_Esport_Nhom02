@@ -4,217 +4,65 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\GiaiDau;
+use App\Models\Game;
 
 class GiaiDauSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $giaiDaus = [
-            // --- NĂM 2024 ---
-            [
-                'id_game'           => 1, // League of Legends
-                'ten_giai_dau'      => 'VCS Mùa Xuân 2024',
-                'logo'              => 'uploads/giai_daus/vcs_spring_2024.png',
-                'mo_ta'             => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Xuân 2024.',
-                'ngay_bat_dau'      => '2024-01-20',
-                'ngay_ket_thuc'     => '2024-03-20',
-                'hinh_thuc_thi_dau' => 'Vòng tròn + Playoff',
-                'dia_diem'          => 'GG Stadium TP.HCM',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 3, // Counter-Strike 2
-                'ten_giai_dau'      => 'CS2 Pro League Season 1 - 2024',
-                'logo'              => 'uploads/giai_daus/cs2_pro_1_2024.png',
-                'mo_ta'             => 'Giải đấu Counter-Strike 2 chuyên nghiệp Việt Nam lần 1 năm 2024.',
-                'ngay_bat_dau'      => '2024-02-15',
-                'ngay_ket_thuc'     => '2024-04-15',
-                'hinh_thuc_thi_dau' => 'Swiss + Knockout',
-                'dia_diem'          => 'Vikings Esport Arena Hà Nội',
-                'so_luong_doi'      => 10,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 2, // Dota 2
-                'ten_giai_dau'      => 'Dota 2 Vietnam Cup 2024',
-                'logo'              => 'uploads/giai_daus/dota2_cup_2024.png',
-                'mo_ta'             => 'Giải Dota 2 Việt Nam Cup năm 2024.',
-                'ngay_bat_dau'      => '2024-04-05',
-                'ngay_ket_thuc'     => '2024-05-15',
-                'hinh_thuc_thi_dau' => 'Double Elimination',
-                'dia_diem'          => 'Cyzone Stadium Hà Nội',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 4, // Valorant
-                'ten_giai_dau'      => 'Valorant Challengers VN Split 1 - 2024',
-                'logo'              => 'uploads/giai_daus/vct_split_1_2024.png',
-                'mo_ta'             => 'Giải đấu Valorant chuyên nghiệp Việt Nam Split 1 - 2024.',
-                'ngay_bat_dau'      => '2024-05-01',
-                'ngay_ket_thuc'     => '2024-07-01',
-                'hinh_thuc_thi_dau' => 'GSL + Playoff',
-                'dia_diem'          => 'Online + Chung kết TP.HCM',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 1, // League of Legends
-                'ten_giai_dau'      => 'VCS Mùa Hè 2024',
-                'logo'              => 'uploads/giai_daus/vcs_summer_2024.png',
-                'mo_ta'             => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Hè 2024.',
-                'ngay_bat_dau'      => '2024-06-20',
-                'ngay_ket_thuc'     => '2024-08-20',
-                'hinh_thuc_thi_dau' => 'Vòng tròn + Playoff',
-                'dia_diem'          => 'GG Stadium TP.HCM',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 5, // PUBG: Battlegrounds
-                'ten_giai_dau'      => 'PUBG Vietnam Championship 2024',
-                'logo'              => 'uploads/giai_daus/pubg_vn_2024.png',
-                'mo_ta'             => 'Giải vô địch PUBG quốc gia năm 2024.',
-                'ngay_bat_dau'      => '2024-08-10',
-                'ngay_ket_thuc'     => '2024-09-10',
-                'hinh_thuc_thi_dau' => 'League + Finals',
-                'dia_diem'          => 'Vikings Esport Arena TP.HCM',
-                'so_luong_doi'      => 16,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 3, // Counter-Strike 2
-                'ten_giai_dau'      => 'CS2 Pro League Season 2 - 2024',
-                'logo'              => 'uploads/giai_daus/cs2_pro_2_2024.png',
-                'mo_ta'             => 'Giải đấu Counter-Strike 2 chuyên nghiệp Việt Nam lần 2 năm 2024.',
-                'ngay_bat_dau'      => '2024-09-15',
-                'ngay_ket_thuc'     => '2024-11-15',
-                'hinh_thuc_thi_dau' => 'Swiss + Knockout',
-                'dia_diem'          => 'Vikings Esport Arena Hà Nội',
-                'so_luong_doi'      => 10,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 4, // Valorant
-                'ten_giai_dau'      => 'Valorant Challengers VN Split 2 - 2024',
-                'logo'              => 'uploads/giai_daus/vct_split_2_2024.png',
-                'mo_ta'             => 'Giải đấu Valorant chuyên nghiệp Việt Nam Split 2 - 2024.',
-                'ngay_bat_dau'      => '2024-10-01',
-                'ngay_ket_thuc'     => '2024-12-01',
-                'hinh_thuc_thi_dau' => 'GSL + Playoff',
-                'dia_diem'          => 'Online + Chung kết Đà Nẵng',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
+        $games = Game::all();
+        $gameIds = $games->pluck('id')->toArray();
+        if (empty($gameIds)) {
+            $gameIds = [1, 2, 3, 4, 5];
+        }
 
-            // --- NĂM 2025 ---
-            [
-                'id_game'           => 1, // League of Legends
-                'ten_giai_dau'      => 'VCS Mùa Xuân 2025',
-                'logo'              => 'uploads/giai_daus/vcs_spring_2025.png',
-                'mo_ta'             => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Xuân 2025.',
-                'ngay_bat_dau'      => '2025-01-15',
-                'ngay_ket_thuc'     => '2025-03-15',
-                'hinh_thuc_thi_dau' => 'Vòng tròn + Playoff',
-                'dia_diem'          => 'GG Stadium TP.HCM',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 3, // Counter-Strike 2
-                'ten_giai_dau'      => 'CS2 Pro League Season 1 - 2025',
-                'logo'              => 'uploads/giai_daus/cs2_pro_1_2025.png',
-                'mo_ta'             => 'Giải đấu Counter-Strike 2 chuyên nghiệp Việt Nam lần 1 năm 2025.',
-                'ngay_bat_dau'      => '2025-02-10',
-                'ngay_ket_thuc'     => '2025-04-10',
-                'hinh_thuc_thi_dau' => 'Swiss + Knockout',
-                'dia_diem'          => 'Vikings Esport Arena Hà Nội',
-                'so_luong_doi'      => 10,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 2, // Dota 2
-                'ten_giai_dau'      => 'Dota 2 Vietnam Championship 2025',
-                'logo'              => 'uploads/giai_daus/dota2_championship_2025.png',
-                'mo_ta'             => 'Giải vô địch Dota 2 quốc gia năm 2025.',
-                'ngay_bat_dau'      => '2025-04-10',
-                'ngay_ket_thuc'     => '2025-05-20',
-                'hinh_thuc_thi_dau' => 'Double Elimination',
-                'dia_diem'          => 'Cyzone Stadium Hà Nội',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 4, // Valorant
-                'ten_giai_dau'      => 'Valorant Challengers VN Split 1 - 2025',
-                'logo'              => 'uploads/giai_daus/vct_split_1_2025.png',
-                'mo_ta'             => 'Giải đấu Valorant chuyên nghiệp chính thức tại Việt Nam - Vòng 1.',
-                'ngay_bat_dau'      => '2025-05-20',
-                'ngay_ket_thuc'     => '2025-07-20',
-                'hinh_thuc_thi_dau' => 'GSL + Playoff',
-                'dia_diem'          => 'Online + Chung kết TP.HCM',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 1, // League of Legends
-                'ten_giai_dau'      => 'VCS Mùa Hè 2025',
-                'logo'              => 'uploads/giai_daus/vcs_summer_2025.png',
-                'mo_ta'             => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Hè 2025.',
-                'ngay_bat_dau'      => '2025-06-15',
-                'ngay_ket_thuc'     => '2025-08-15',
-                'hinh_thuc_thi_dau' => 'Vòng tròn + Playoff',
-                'dia_diem'          => 'GG Stadium TP.HCM',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 5, // PUBG: Battlegrounds
-                'ten_giai_dau'      => 'PUBG Vietnam Series 2025',
-                'logo'              => 'uploads/giai_daus/pubg_pvs_2025.png',
-                'mo_ta'             => 'Giải đấu sinh tồn PUBG chuyên nghiệp quốc gia năm 2025.',
-                'ngay_bat_dau'      => '2025-08-25',
-                'ngay_ket_thuc'     => '2025-09-25',
-                'hinh_thuc_thi_dau' => 'League + Finals',
-                'dia_diem'          => 'Vikings Esport Arena TP.HCM',
-                'so_luong_doi'      => 16,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 3, // Counter-Strike 2
-                'ten_giai_dau'      => 'CS2 Pro League Season 2 - 2025',
-                'logo'              => 'uploads/giai_daus/cs2_pro_2_2025.png',
-                'mo_ta'             => 'Giải đấu Counter-Strike 2 chuyên nghiệp Việt Nam lần 2 năm 2025.',
-                'ngay_bat_dau'      => '2025-09-10',
-                'ngay_ket_thuc'     => '2025-11-10',
-                'hinh_thuc_thi_dau' => 'Swiss + Knockout',
-                'dia_diem'          => 'Vikings Esport Arena Hà Nội',
-                'so_luong_doi'      => 10,
-                'trang_thai'        => 1,
-            ],
-            [
-                'id_game'           => 4, // Valorant
-                'ten_giai_dau'      => 'Valorant Challengers VN Split 2 - 2025',
-                'logo'              => 'uploads/giai_daus/vct_split_2_2025.png',
-                'mo_ta'             => 'Giải đấu Valorant chuyên nghiệp chính thức tại Việt Nam - Vòng 2.',
-                'ngay_bat_dau'      => '2025-10-15',
-                'ngay_ket_thuc'     => '2025-12-15',
-                'hinh_thuc_thi_dau' => 'GSL + Playoff',
-                'dia_diem'          => 'Online + Chung kết Đà Nẵng',
-                'so_luong_doi'      => 8,
-                'trang_thai'        => 1,
-            ],
+        $tournaments = [
+            // --- 2020 (2 Giải) ---
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'VCS Mùa Xuân 2020', 'mo_ta' => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Xuân 2020.', 'ngay_bat_dau' => '2020-01-15', 'ngay_ket_thuc' => '2020-03-20', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'GG Stadium TP.HCM', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[3 % count($gameIds)], 'ten_giai_dau' => 'VCT Mùa Đông 2020', 'mo_ta' => 'Giải đấu Valorant Championship Tour - Mùa Đông 2020.', 'ngay_bat_dau' => '2020-10-15', 'ngay_ket_thuc' => '2020-12-20', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Online', 'so_luong_doi' => 8, 'trang_thai' => 1],
+
+            // --- 2021 (3 Giải) ---
+            ['id_game' => $gameIds[2 % count($gameIds)], 'ten_giai_dau' => 'CS2 Spring Cup 2021', 'mo_ta' => 'Giải đấu CS2 Spring Cup chuyên nghiệp năm 2021.', 'ngay_bat_dau' => '2021-02-10', 'ngay_ket_thuc' => '2021-04-15', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Vikings Esport Arena Hà Nội', 'so_luong_doi' => 10, 'trang_thai' => 1],
+            ['id_game' => $gameIds[1 % count($gameIds)], 'ten_giai_dau' => 'Dota 2 Summer Open 2021', 'mo_ta' => 'Giải đấu Dota 2 Việt Nam Summer Open năm 2021.', 'ngay_bat_dau' => '2021-06-05', 'ngay_ket_thuc' => '2021-08-10', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Cyzone Stadium Hà Nội', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[1 % count($gameIds)], 'ten_giai_dau' => 'Dota 2 Winter Arena 2021', 'mo_ta' => 'Giải đấu Dota 2 Việt Nam Winter Arena - Mùa Đông 2021.', 'ngay_bat_dau' => '2021-10-15', 'ngay_ket_thuc' => '2021-12-20', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Cyzone Stadium Hà Nội', 'so_luong_doi' => 8, 'trang_thai' => 1],
+
+            // --- 2022 (5 Giải) ---
+            ['id_game' => $gameIds[4 % count($gameIds)], 'ten_giai_dau' => 'PUBG Vietnam Spring 2022', 'mo_ta' => 'Giải đấu PUBG sinh tồn chuyên nghiệp quốc gia - Mùa Xuân 2022.', 'ngay_bat_dau' => '2022-01-10', 'ngay_ket_thuc' => '2022-03-15', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Vikings Esport Arena TP.HCM', 'so_luong_doi' => 16, 'trang_thai' => 1],
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'VCS Mùa Hè 2022', 'mo_ta' => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Hè 2022.', 'ngay_bat_dau' => '2022-05-20', 'ngay_ket_thuc' => '2022-07-30', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'GG Stadium TP.HCM', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[3 % count($gameIds)], 'ten_giai_dau' => 'VCT Challengers Stage 2 2022', 'mo_ta' => 'Giải đấu Valorant Challengers Việt Nam Stage 2 2022.', 'ngay_bat_dau' => '2022-08-01', 'ngay_ket_thuc' => '2022-09-15', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Online', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'VCS Mùa Đông 2022', 'mo_ta' => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Đông 2022.', 'ngay_bat_dau' => '2022-10-05', 'ngay_ket_thuc' => '2022-12-10', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'GG Stadium TP.HCM', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[2 % count($gameIds)], 'ten_giai_dau' => 'CS2 Winter Invitational 2022', 'mo_ta' => 'Giải đấu CS2 mời các đội tuyển hàng đầu Mùa Đông 2022.', 'ngay_bat_dau' => '2022-11-15', 'ngay_ket_thuc' => '2022-12-25', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Online', 'so_luong_doi' => 10, 'trang_thai' => 1],
+
+            // --- 2023 (6 Giải) ---
+            ['id_game' => $gameIds[3 % count($gameIds)], 'ten_giai_dau' => 'VCT Split 1 2023', 'mo_ta' => 'Giải đấu Valorant Challengers Vietnam Split 1 - Mùa Xuân 2023.', 'ngay_bat_dau' => '2023-01-12', 'ngay_ket_thuc' => '2023-03-15', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Online', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'VCS Mùa Xuân 2023', 'mo_ta' => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Xuân 2023.', 'ngay_bat_dau' => '2023-02-15', 'ngay_ket_thuc' => '2023-04-20', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'GG Stadium TP.HCM', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[4 % count($gameIds)], 'ten_giai_dau' => 'PUBG Summer Series 2023', 'mo_ta' => 'Giải đấu PUBG mùa hè kịch tính 2023.', 'ngay_bat_dau' => '2023-05-10', 'ngay_ket_thuc' => '2023-07-05', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Vikings Arena', 'so_luong_doi' => 16, 'trang_thai' => 1],
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'VCS Mùa Hè 2023', 'mo_ta' => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Hè 2023.', 'ngay_bat_dau' => '2023-07-15', 'ngay_ket_thuc' => '2023-09-20', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'GG Stadium TP.HCM', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[2 % count($gameIds)], 'ten_giai_dau' => 'CS2 Championship 2023', 'mo_ta' => 'Giải vô địch CS2 toàn quốc năm 2023.', 'ngay_bat_dau' => '2023-09-01', 'ngay_ket_thuc' => '2023-10-25', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Vikings Esport Arena Hà Nội', 'so_luong_doi' => 10, 'trang_thai' => 1],
+            ['id_game' => $gameIds[1 % count($gameIds)], 'ten_giai_dau' => 'Dota 2 Winter Clash 2023', 'mo_ta' => 'Giải đấu Dota 2 Việt Nam Winter Clash - Mùa Đông 2023.', 'ngay_bat_dau' => '2023-10-10', 'ngay_ket_thuc' => '2023-12-15', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Cyzone Stadium Hà Nội', 'so_luong_doi' => 8, 'trang_thai' => 1],
+
+            // --- 2024 (5 Giải) ---
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'VCS Mùa Xuân 2024', 'mo_ta' => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Xuân 2024.', 'ngay_bat_dau' => '2024-01-15', 'ngay_ket_thuc' => '2024-03-20', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'GG Stadium TP.HCM', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[3 % count($gameIds)], 'ten_giai_dau' => 'VCT Challengers Split 1 2024', 'mo_ta' => 'Giải đấu Valorant Challengers Việt Nam 2024.', 'ngay_bat_dau' => '2024-04-10', 'ngay_ket_thuc' => '2024-06-15', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Online', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'VCS Mùa Hè 2024', 'mo_ta' => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Hè 2024.', 'ngay_bat_dau' => '2024-06-20', 'ngay_ket_thuc' => '2024-08-30', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'GG Stadium TP.HCM', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[2 % count($gameIds)], 'ten_giai_dau' => 'CS2 Winter League 2024', 'mo_ta' => 'Giải đấu CS2 Winter League chuyên nghiệp - Mùa Đông 2024.', 'ngay_bat_dau' => '2024-10-15', 'ngay_ket_thuc' => '2024-12-20', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Vikings Esport Arena Hà Nội', 'so_luong_doi' => 10, 'trang_thai' => 1],
+            ['id_game' => $gameIds[4 % count($gameIds)], 'ten_giai_dau' => 'PUBG Winter Master 2024', 'mo_ta' => 'Giải đấu PUBG sinh tồn Mùa Đông 2024.', 'ngay_bat_dau' => '2024-11-01', 'ngay_ket_thuc' => '2024-12-25', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Online', 'so_luong_doi' => 16, 'trang_thai' => 0],
+
+            // --- 2025 (4 Giải) ---
+            ['id_game' => $gameIds[3 % count($gameIds)], 'ten_giai_dau' => 'VCT Split 1 2025', 'mo_ta' => 'Giải đấu Valorant Challengers Vietnam Split 1 - Mùa Xuân 2025.', 'ngay_bat_dau' => '2025-01-15', 'ngay_ket_thuc' => '2025-03-20', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Online', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'LCP Mùa Xuân 2025', 'mo_ta' => 'Giải đấu League of Legends Championship Pacific - Mùa Xuân 2025.', 'ngay_bat_dau' => '2025-02-10', 'ngay_ket_thuc' => '2025-04-30', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Taipei Esport Arena', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[5 % count($gameIds)], 'ten_giai_dau' => 'FC Online Vietnam Cup 2025', 'mo_ta' => 'Giải đấu bóng đá điện tử FC Online Việt Nam năm 2025.', 'ngay_bat_dau' => '2025-06-01', 'ngay_ket_thuc' => '2025-08-10', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Hoàng Mai Stadium Hà Nội', 'so_luong_doi' => 12, 'trang_thai' => 1],
+            ['id_game' => $gameIds[4 % count($gameIds)], 'ten_giai_dau' => 'PUBG Winter Cup 2025', 'mo_ta' => 'Giải đấu PUBG sinh tồn chuyên nghiệp quốc gia - Mùa Đông 2025.', 'ngay_bat_dau' => '2025-10-15', 'ngay_ket_thuc' => '2025-12-20', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Vikings Esport Arena TP.HCM', 'so_luong_doi' => 16, 'trang_thai' => 1],
+
+            // --- 2026 (3 Giải) ---
+            ['id_game' => $gameIds[0 % count($gameIds)], 'ten_giai_dau' => 'VCS Mùa Xuân 2026', 'mo_ta' => 'Giải vô địch Liên Minh Huyền Thoại Việt Nam - Mùa Xuân 2026.', 'ngay_bat_dau' => '2026-01-15', 'ngay_ket_thuc' => '2026-03-20', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'GG Stadium TP.HCM', 'so_luong_doi' => 8, 'trang_thai' => 1],
+            ['id_game' => $gameIds[3 % count($gameIds)], 'ten_giai_dau' => 'VCT Pacific Stage 1 2026', 'mo_ta' => 'Giải đấu Valorant VCT Pacific Stage 1 năm 2026.', 'ngay_bat_dau' => '2026-04-05', 'ngay_ket_thuc' => '2026-06-10', 'hinh_thuc_thi_dau' => 'Offline', 'dia_diem' => 'Seoul Esports Stadium', 'so_luong_doi' => 10, 'trang_thai' => 1],
+            ['id_game' => $gameIds[2 % count($gameIds)], 'ten_giai_dau' => 'CS2 Winter Showdown 2026', 'mo_ta' => 'Giải đấu CS2 Winter Showdown chuyên nghiệp - Mùa Đông 2026.', 'ngay_bat_dau' => '2026-10-15', 'ngay_ket_thuc' => '2026-12-20', 'hinh_thuc_thi_dau' => 'Online', 'dia_diem' => 'Vikings Esport Arena Hà Nội', 'so_luong_doi' => 10, 'trang_thai' => 0],
         ];
 
-        foreach ($giaiDaus as $key => $gd) {
-            $gd['logo'] = 'https://api.dicebear.com/7.x/initials/svg?seed=' . urlencode($gd['ten_giai_dau']);
-            if ($key % 3 == 0) {
-                $gd['trang_thai'] = 0;
-            }
+        foreach ($tournaments as $gd) {
+            $gd['logo']       = 'https://api.dicebear.com/7.x/initials/svg?seed=' . urlencode($gd['ten_giai_dau']);
+            $gd['created_at'] = $gd['ngay_bat_dau'] . ' 08:00:00';
             GiaiDau::create($gd);
         }
     }

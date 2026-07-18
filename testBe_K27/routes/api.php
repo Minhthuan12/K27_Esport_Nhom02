@@ -19,6 +19,7 @@ use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\ChiTietTranDauController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\PhanQuyenController;
+use App\Http\Controllers\ThongKeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -102,6 +103,36 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('phan-quyen')->group(function () {
         Route::get('/get-data', [PhanQuyenController::class, 'getData']);
+    });
+
+    Route::prefix('thong-ke')->group(function () {
+        // Nhóm 1
+        Route::get('/nhom-1/cau-1', [ThongKeController::class, 'nhom1Cau1']);
+        Route::get('/nhom-1/cau-2', [ThongKeController::class, 'nhom1Cau2']);
+        
+        // Nhóm 2
+        Route::get('/nhom-2/cau-1', [ThongKeController::class, 'nhom2Cau1']);
+        Route::get('/nhom-2/cau-2', [ThongKeController::class, 'nhom2Cau2']);
+
+        // Nhóm 3
+        Route::get('/nhom-3/cau-1', [ThongKeController::class, 'nhom3Cau1']);
+        Route::get('/nhom-3/cau-2', [ThongKeController::class, 'nhom3Cau2']);
+
+        // Nhóm 4
+        Route::get('/nhom-4/cau-1', [ThongKeController::class, 'nhom4Cau1']);
+        Route::get('/nhom-4/cau-2', [ThongKeController::class, 'nhom4Cau2']);
+
+        // Nhóm 5
+        Route::get('/nhom-5/cau-1', [ThongKeController::class, 'nhom5Cau1']);
+        Route::get('/nhom-5/cau-2', [ThongKeController::class, 'nhom5Cau2']);
+
+        // Nhóm 6
+        Route::get('/nhom-6/cau-1', [ThongKeController::class, 'nhom6Cau1']);
+        Route::get('/nhom-6/cau-2', [ThongKeController::class, 'nhom6Cau2']);
+
+        // Nhóm 7
+        Route::get('/nhom-7/cau-1', [ThongKeController::class, 'nhom7Cau1']);
+        Route::get('/nhom-7/cau-2', [ThongKeController::class, 'nhom7Cau2']);
     });
 
 });

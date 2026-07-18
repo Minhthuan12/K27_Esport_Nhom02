@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\TuyenThu;
-use App\Models\ThongSoTuyenThu;
 use App\Models\Game;
+use App\Models\ThongSoTuyenThu;
 
 class ThongSoTuyenThuSeeder extends Seeder
 {
@@ -14,28 +14,39 @@ class ThongSoTuyenThuSeeder extends Seeder
         $tuyenThus = TuyenThu::all();
         $games     = Game::all();
 
-        if ($games->isEmpty()) return;
+        if ($tuyenThus->isEmpty() || $games->isEmpty()) {
+            return;
+        }
+
+        $gameIds    = $games->pluck('id')->toArray();
+        $totalGames = count($gameIds);
 
         foreach ($tuyenThus as $key => $tt) {
-            // Lấy ngẫu nhiên 1-2 game, random($n) luôn trả về Collection khi truyền số nguyên
-            $soGame        = min(2, $games->count());
-            $selectedGames = $games->random($soGame);
+            // Xác định game thi đấu deterministically dựa trên ID tuyển thủ (không dùng rand)
+            $primaryGameIdx   = ($tt->id - 1) % $totalGames;
+            $secondaryGameIdx = ($tt->id + 1) % $totalGames;
 
-            // Đảm bảo luôn là Collection (trường hợp chỉ có 1 game trong DB)
-            if (!($selectedGames instanceof \Illuminate\Support\Collection)) {
-                $selectedGames = collect([$selectedGames]);
-            }
+            $assignedGameIds  = array_unique([$gameIds[$primaryGameIdx], $gameIds[$secondaryGameIdx]]);
 
-            foreach ($selectedGames as $gIdx => $game) {
+            foreach ($assignedGameIds as $gIdx => $gId) {
+                $wins   = 15 + (($tt->id * 3 + $gIdx * 7) % 35);
+                $losses = 5  + (($tt->id * 2 + $gIdx * 5) % 15);
+                $mvps   = 1  + (($tt->id + $gIdx * 3) % 12);
+
+                $year   = 2020 + (($tt->id + $gIdx) % 7);
+                $month  = str_pad(1 + (($tt->id * 2 + $gIdx) % 12), 2, '0', STR_PAD_LEFT);
+                $date   = "$year-$month-15 10:00:00";
+
                 ThongSoTuyenThu::create([
                     'id_doi_tuyen'  => $tt->id_doi_tuyen,
-                    'id_game'       => $game->id,
+                    'id_game'       => $gId,
                     'id_tuyen_thu'  => $tt->id,
-                    'trang_thai'    => (($key + $gIdx) % 4 == 0) ? 0 : 1,
-                    'so_tran_thua'  => 5  + ($tt->id % 5)  + ($game->id % 3),
-                    'so_tran_thang' => 10 + ($tt->id % 10) + ($game->id % 5),
-                    'so_tran_hoa'   => $tt->id % 3,
-                    'so_mvp'        => 1  + ($tt->id % 8),
+                    'trang_thai'    => 1,
+                    'so_tran_thua'  => $losses,
+                    'so_tran_thang' => $wins,
+                    'so_tran_hoa'   => 0,
+                    'so_mvp'        => $mvps,
+                    'created_at'    => $date,
                 ]);
             }
         }

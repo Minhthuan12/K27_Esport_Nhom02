@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Chart Nhóm 1 - Thống Kê Giải Đấu & Quy Mô</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(21, 28, 45, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 30px 20px;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .badge-group {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
+            gap: 30px;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chart-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+        }
+
+        .card-title-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--accent-cyan);
+        }
+
+        .filter-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px 18px;
+            border-radius: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .filter-input {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .filter-input:focus {
+            border-color: #6366f1;
+        }
+
+        .btn-filter {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.1s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-filter:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            height: 320px;
+            width: 100%;
+        }
+
+        .sql-box {
+            margin-top: 20px;
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 12px 16px;
+            border-left: 3px solid var(--accent-cyan);
+            font-family: monospace;
+            font-size: 0.82rem;
+            color: #38bdf8;
+            overflow-x: auto;
+        }
+
+        .sql-label {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 700;
+        }
+
+        @media (max-width: 640px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <span class="badge-group"><i class="fa-solid fa-chart-pie"></i> DEMO CHART HỆ THỐNG</span>
+            <h1>Nhóm 1: Thống Kê Giải Đấu & Quy Mô</h1>
+            <p>Minh họa giao diện lọc thời gian (Input) ➔ Cập nhật biểu đồ thống kê sống động (Output)</p>
+        </div>
+
+        <!-- Grid 2 Charts -->
+        <div class="grid-container">
+
+            <!-- CHART 1 -->
+            <div class="chart-card">
+                <div class="card-title-box">
+                    <div class="card-title">
+                        <i class="fa-solid fa-chart-line"></i>
+                        Chart 1: Số Lượng Giải Đấu Theo Năm
+                    </div>
+                    <span style="font-size: 0.8rem; color: #10b981; background: rgba(16,185,129,0.15); padding: 3px 10px; border-radius: 12px;">Đơn Giản</span>
+                </div>
+
+                <!-- Filter Form 1 -->
+                <div class="filter-box">
+                    <div class="filter-group">
+                        <label><i class="fa-regular fa-calendar-days"></i> Từ Năm:</label>
+                        <select id="c1_tu_nam" class="filter-input">
+                            <option value="2020" selected>2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Đến Năm:</label>
+                        <select id="c1_den_nam" class="filter-input">
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026" selected>2026</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-filter" onclick="updateChart1()">
+                        <i class="fa-solid fa-filter"></i> Lọc Biểu Đồ
+                    </button>
+                </div>
+
+                <!-- Canvas Chart 1 -->
+                <div class="canvas-wrapper">
+                    <canvas id="chart1Canvas"></canvas>
+                </div>
+
+                <!-- SQL Query Display -->
+                <div class="sql-box">
+                    <span class="sql-label">TRUY VẤN SQL THỰC THI (LỌC THEO NĂM):</span>
+                    SELECT YEAR(ngay_bat_dau) AS nam_to_chuc, COUNT(*) AS so_luong_giai<br>
+                    FROM giai_daus<br>
+                    WHERE YEAR(ngay_bat_dau) &gt;= <span id="sql1_tu">2020</span> AND YEAR(ngay_bat_dau) &lt;= <span id="sql1_den">2026</span><br>
+                    GROUP BY YEAR(ngay_bat_dau) ORDER BY nam_to_chuc ASC;
+                </div>
+            </div>
+
+            <!-- CHART 2 -->
+            <div class="chart-card">
+                <div class="card-title-box">
+                    <div class="card-title">
+                        <i class="fa-solid fa-chart-column"></i>
+                        Chart 2: Số Giải & Số Đội Theo Tựa Game
+                    </div>
+                    <span style="font-size: 0.8rem; color: #a855f7; background: rgba(168,85,247,0.15); padding: 3px 10px; border-radius: 12px;">Vừa Phải</span>
+                </div>
+
+                <!-- Filter Form 2 -->
+                <div class="filter-box">
+                    <div class="filter-group">
+                        <label><i class="fa-regular fa-calendar"></i> Từ Ngày:</label>
+                        <input type="date" id="c2_tu_ngay" class="filter-input" value="2020-01-01">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Đến Ngày:</label>
+                        <input type="date" id="c2_den_ngay" class="filter-input" value="2026-12-31">
+                    </div>
+
+                    <button class="btn-filter" onclick="updateChart2()">
+                        <i class="fa-solid fa-filter"></i> Lọc Biểu Đồ
+                    </button>
+                </div>
+
+                <!-- Canvas Chart 2 -->
+                <div class="canvas-wrapper">
+                    <canvas id="chart2Canvas"></canvas>
+                </div>
+
+                <!-- SQL Query Display -->
+                <div class="sql-box">
+                    <span class="sql-label">TRUY VẤN SQL THỰC THI (JOIN 2 BẢNG):</span>
+                    SELECT games.ten_game, COUNT(giai_daus.id) AS so_giai_dau, SUM(giai_daus.so_luong_doi) AS tong_so_doi<br>
+                    FROM giai_daus JOIN games ON giai_daus.id_game = games.id<br>
+                    WHERE giai_daus.ngay_bat_dau &gt;= '<span id="sql2_tu">2020-01-01</span>' AND giai_daus.ngay_bat_dau &lt;= '<span id="sql2_den">2026-12-31</span>'<br>
+                    GROUP BY games.id, games.ten_game ORDER BY tong_so_doi DESC;
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script Chart Rendering & Interactivity -->
+    <script>
+        let chart1Instance = null;
+        let chart2Instance = null;
+
+        const rawTournamentsData = [
+            { id: 1, game: 'Liên Minh Huyền Thoại', ngay: '2020-01-15', doi: 8 },
+            { id: 2, game: 'Valorant', ngay: '2020-10-15', doi: 8 },
+            { id: 3, game: 'CS2', ngay: '2021-02-10', doi: 10 },
+            { id: 4, game: 'Dota 2', ngay: '2021-06-05', doi: 8 },
+            { id: 5, game: 'Dota 2', ngay: '2021-10-15', doi: 8 },
+            { id: 6, game: 'PUBG', ngay: '2022-01-10', doi: 16 },
+            { id: 7, game: 'Liên Minh Huyền Thoại', ngay: '2022-05-20', doi: 8 },
+            { id: 8, game: 'Valorant', ngay: '2022-08-01', doi: 8 },
+            { id: 9, game: 'CS2', ngay: '2022-11-15', doi: 10 },
+            { id: 10, game: 'Valorant', ngay: '2023-01-12', doi: 8 },
+            { id: 11, game: 'Liên Minh Huyền Thoại', ngay: '2023-02-15', doi: 8 },
+            { id: 12, game: 'PUBG', ngay: '2023-05-10', doi: 16 },
+            { id: 13, game: 'Liên Minh Huyền Thoại', ngay: '2023-07-15', doi: 8 },
+            { id: 14, game: 'CS2', ngay: '2023-09-01', doi: 10 },
+            { id: 15, game: 'Dota 2', ngay: '2023-10-10', doi: 8 },
+            { id: 16, game: 'Liên Minh Huyền Thoại', ngay: '2024-01-15', doi: 8 },
+            { id: 17, game: 'Valorant', ngay: '2024-04-10', doi: 8 },
+            { id: 18, game: 'Liên Minh Huyền Thoại', ngay: '2024-06-20', doi: 8 },
+            { id: 19, game: 'CS2', ngay: '2024-10-15', doi: 10 },
+            { id: 20, game: 'PUBG', ngay: '2024-11-01', doi: 16 },
+            { id: 21, game: 'Valorant', ngay: '2025-01-15', doi: 8 },
+            { id: 22, game: 'FC Online', ngay: '2025-06-01', doi: 12 },
+            { id: 23, game: 'PUBG', ngay: '2025-10-15', doi: 16 },
+            { id: 24, game: 'Liên Minh Huyền Thoại', ngay: '2026-01-15', doi: 8 },
+        ];
+
+        window.onload = function() {
+            updateChart1();
+            updateChart2();
+        };
+
+        // HÀM CẬP NHẬT CHART 1 (CHỈ LỌC THEO NĂM)
+        function updateChart1() {
+            const tuNam = parseInt(document.getElementById('c1_tu_nam').value);
+            const denNam = parseInt(document.getElementById('c1_den_nam').value);
+
+            document.getElementById('sql1_tu').innerText = tuNam;
+            document.getElementById('sql1_den').innerText = denNam;
+
+            // Nhóm dữ liệu theo NĂM
+            const yearCounts = {};
+            for (let y = tuNam; y <= denNam; y++) {
+                yearCounts[y] = 0;
+            }
+
+            rawTournamentsData.forEach(item => {
+                const itemYear = new Date(item.ngay).getFullYear();
+                if (itemYear >= tuNam && itemYear <= denNam) {
+                    yearCounts[itemYear] = (yearCounts[itemYear] || 0) + 1;
+                }
+            });
+
+            const yearLabels = Object.keys(yearCounts).map(y => 'Năm ' + y);
+            const yearValues = Object.values(yearCounts);
+
+            if (chart1Instance) {
+                chart1Instance.destroy();
+            }
+
+            const ctx1 = document.getElementById('chart1Canvas').getContext('2d');
+            chart1Instance = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: yearLabels,
+                    datasets: [{
+                        label: 'Số Lượng Giải Đấu (Giải)',
+                        data: yearValues,
+                        backgroundColor: 'rgba(99, 102, 241, 0.85)',
+                        borderColor: '#6366f1',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1', font: { family: 'Outfit' } } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                        y: { ticks: { color: '#94a3b8', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        // HÀM CẬP NHẬT CHART 2
+        function updateChart2() {
+            const tuNgayStr = document.getElementById('c2_tu_ngay').value;
+            const denNgayStr = document.getElementById('c2_den_ngay').value;
+
+            document.getElementById('sql2_tu').innerText = tuNgayStr;
+            document.getElementById('sql2_den').innerText = denNgayStr;
+
+            const tuNgay = new Date(tuNgayStr);
+            const denNgay = new Date(denNgayStr);
+
+            const gameStats = {};
+            rawTournamentsData.forEach(item => {
+                const itemDate = new Date(item.ngay);
+                if (itemDate >= tuNgay && itemDate <= denNgay) {
+                    if (!gameStats[item.game]) {
+                        gameStats[item.game] = { soGiai: 0, tongDoi: 0 };
+                    }
+                    gameStats[item.game].soGiai += 1;
+                    gameStats[item.game].tongDoi += item.doi;
+                }
+            });
+
+            const gameLabels = Object.keys(gameStats);
+            const soGiaiData = gameLabels.map(g => gameStats[g].soGiai);
+            const tongDoiData = gameLabels.map(g => gameStats[g].tongDoi);
+
+            if (chart2Instance) {
+                chart2Instance.destroy();
+            }
+
+            const ctx2 = document.getElementById('chart2Canvas').getContext('2d');
+            chart2Instance = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: gameLabels.length > 0 ? gameLabels : ['Không có dữ liệu'],
+                    datasets: [
+                        {
+                            label: 'Số Giải Đấu (Giải)',
+                            data: soGiaiData.length > 0 ? soGiaiData : [0],
+                            backgroundColor: 'rgba(99, 102, 241, 0.85)',
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Tổng Số Đội Tham Gia (Đội)',
+                            data: tongDoiData.length > 0 ? tongDoiData : [0],
+                            backgroundColor: 'rgba(168, 85, 247, 0.85)',
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1', font: { family: 'Outfit' } } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
