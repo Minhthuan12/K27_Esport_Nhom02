@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('nha_tai_tros', function (Blueprint $table) {
             $table->id();
             $table->string('ten_nha_tai_tro');
-            $table->string('logo')->nullable();
+            $table->longText('logo')->nullable();
             $table->string('ten_nguoi_dai_dien');
             $table->string('so_dien_thoai_dai_dien');
             $table->string('email_dai_dien')->nullable();

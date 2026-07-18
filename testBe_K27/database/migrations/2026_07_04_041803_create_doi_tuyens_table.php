@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('id_nguoi_dung');
             $table->string('ten_doi_tuyen')->unique();
             $table->string('ten_viet_tat')->unique();
-            $table->string('logo')->nullable();
+            $table->longText('logo')->nullable();
             $table->text('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1)->comment('0: Không hoạt động, 1: Hoạt động');
             $table->softDeletes();

@@ -20,6 +20,7 @@ use App\Http\Controllers\ChiTietTranDauController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\PhanQuyenController;
 use App\Http\Controllers\ThongKeController;
+use App\Http\Controllers\ClientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// --- CLIENT ENDPOINTS ---
+Route::prefix('client')->group(function () {
+    Route::get('/home-data', [ClientController::class, 'getHomeData']);
+});
+
+// --- ADMIN ENDPOINTS ---
 Route::prefix('admin')->group(function () {
 
     Route::prefix('nguoi-dung')->group(function () {

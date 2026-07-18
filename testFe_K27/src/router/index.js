@@ -1,18 +1,110 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
+    // CLIENT ROUTES (Sử dụng client-layout)
     {
         path: '/',
+        meta: { layout: 'client' },
         component: () => import('../components/Client/Home/index.vue')
     },
     {
         path: '/trang-chu',
+        meta: { layout: 'client' },
         component: () => import('../components/Client/Home/index.vue')
     },
     {
         path: '/home',
+        meta: { layout: 'client' },
         component: () => import('../components/Client/Home/index.vue')
     },
+    {
+        path: '/client/home',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/Home/index.vue')
+    },
+    {
+        path: '/Client/Home',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/Home/index.vue')
+    },
+    {
+        path: '/Client/Home/index.vue',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/Home/index.vue')
+    },
+    // CLIENT GIẢI ĐẤU ROUTE (VIEW THỨ 2)
+    {
+        path: '/client/giai-dau',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/GiaiDau/index.vue')
+    },
+    {
+        path: '/client/giai-dau/index.vue',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/GiaiDau/index.vue')
+    },
+    {
+        path: '/giai-dau-client',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/GiaiDau/index.vue')
+    },
+    // CLIENT LỊCH THI ĐẤU ROUTE (VIEW THỨ 3)
+    {
+        path: '/client/lich-thi-dau',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/LichThiDau/index.vue')
+    },
+    {
+        path: '/client/lich-thi-dau/index.vue',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/LichThiDau/index.vue')
+    },
+    // CLIENT ĐỘI TUYỂN ROUTE (VIEW THỨ 4)
+    {
+        path: '/client/doi-tuyen',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/DoiTuyen/index.vue')
+    },
+    {
+        path: '/client/doi-tuyen/index.vue',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/DoiTuyen/index.vue')
+    },
+    // CLIENT TIN TỨC ROUTE (VIEW THỨ 5)
+    {
+        path: '/client/tin-tuc',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/TinTuc/index.vue')
+    },
+    {
+        path: '/client/tin-tuc/index.vue',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/TinTuc/index.vue')
+    },
+    // CLIENT GAME ROUTE (VIEW THỨ 6)
+    {
+        path: '/client/game',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/Game/index.vue')
+    },
+    {
+        path: '/client/game/index.vue',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/Game/index.vue')
+    },
+    // CLIENT NHÀ TÀI TRỢ ROUTE (VIEW THỨ 7)
+    {
+        path: '/client/nha-tai-tro',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/NhaTaiTro/index.vue')
+    },
+    {
+        path: '/client/nha-tai-tro/index.vue',
+        meta: { layout: 'client' },
+        component: () => import('../components/Client/NhaTaiTro/index.vue')
+    },
+
+    // ADMIN ROUTES (Tự động sử dụng default-layout / Admin Wrapper)
     {
         path: '/doituyen',
         component: () => import('../components/Admin/DoiTuyen/index.vue')

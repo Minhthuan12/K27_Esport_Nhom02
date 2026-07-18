@@ -1,7 +1,6 @@
 <template>
     <div class="wrapper">
         <div class="header-wrapper">
-
             <header>
                 <div class="topbar d-flex align-items-center">
                     <HeaderRocker></HeaderRocker>
@@ -11,8 +10,7 @@
         </div>
         <div class="page-wrapper">
             <div class="page-content">
-                <router-view></router-view>
-
+                <slot></slot>
             </div>
         </div>
         <div class="overlay toggle-icon"></div>
@@ -21,17 +19,16 @@
     </div>
 </template>
 <script>
-import HeaderRocker from "../../layout/components/HeaderRocker.vue";
-import MenuRocker from "../../layout/components/MenuRocker.vue";
-import FooterRocker from "../../layout/components/FooterRocker.vue";
+import HeaderRocker from "../components/Admin/HeaderRocker.vue";
+import MenuRocker from "../components/Admin/MenuRocker.vue";
+import FooterRocker from "../components/Admin/FooterRocker.vue";
 import "../../assets/js/pace.min.js";
 import "../../assets/js/bootstrap.bundle.min.js";
 import "../../assets/js/jquery.min.js";
 import "../../assets/plugins/simplebar/js/simplebar.min.js";
 import "../../assets/plugins/metismenu/js/metisMenu.min.js";
-// import "../../assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js";
-// import "../../assets/js/index.js";
 import "../../assets/js/app.js";
+
 export default {
     components: {
         HeaderRocker,
