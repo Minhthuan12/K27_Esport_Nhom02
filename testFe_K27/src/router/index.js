@@ -3,7 +3,15 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
     {
         path: '/',
-        component: () => import('../layout/wrapper/index.vue')
+        component: () => import('../components/Client/Home/index.vue')
+    },
+    {
+        path: '/trang-chu',
+        component: () => import('../components/Client/Home/index.vue')
+    },
+    {
+        path: '/home',
+        component: () => import('../components/Client/Home/index.vue')
     },
     {
         path: '/doituyen',
