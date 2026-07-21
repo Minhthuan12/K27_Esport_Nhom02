@@ -12,6 +12,15 @@
         </div>
         <nav class="navbar navbar-expand-xl w-100">
             <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
+                <!-- 0. DASHBOARD -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">
+                        <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                        </div>
+                        <div class="menu-title">Dashboard</div>
+                    </a>
+                </li>
+
                 <!-- 1. NGƯỜI DÙNG -->
                 <li class="nav-item">
                     <a class="nav-link" href="/nguoi-dung">

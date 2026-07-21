@@ -21,6 +21,7 @@ use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\PhanQuyenController;
 use App\Http\Controllers\ThongKeController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,7 @@ Route::prefix('client')->group(function () {
 
 // --- ADMIN ENDPOINTS ---
 Route::prefix('admin')->group(function () {
+    Route::get('/dashboard/get-data', [DashboardController::class, 'getData']);
 
     Route::prefix('nguoi-dung')->group(function () {
         Route::get('/get-data', [NguoiDungController::class, 'getData']);

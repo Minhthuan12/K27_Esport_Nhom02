@@ -106,6 +106,10 @@ const routes = [
 
     // ADMIN ROUTES (Tự động sử dụng default-layout / Admin Wrapper)
     {
+        path: '/dashboard',
+        component: () => import('../components/Admin/DashBoard/index.vue')
+    },
+    {
         path: '/doituyen',
         component: () => import('../components/Admin/DoiTuyen/index.vue')
     },
